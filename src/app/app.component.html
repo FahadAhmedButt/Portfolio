@@ -1,0 +1,516 @@
+<!-- ════════════════════════════════════════════════════════════════
+     FAHAD AHMED — PORTFOLIO  |  app.component.html
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║         NAVIGATION           ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<header class="navbar" [class.scrolled]="scrolled">
+  <div class="nav-container">
+    <a class="nav-logo" (click)="scrollTo('home')">
+      <span class="logo-text">Fahad</span>
+      <span class="logo-dot">.</span>
+    </a>
+
+    <nav class="nav-menu" [class.open]="menuOpen">
+      <ul class="nav-links">
+        <li *ngFor="let link of ['home','portfolio','about','resume','contact']">
+          <a
+            class="nav-link"
+            [class.active]="activeSection === link"
+            (click)="scrollTo(link)"
+          >{{ link | titlecase }}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-right">
+      <button class="btn-hire" (click)="scrollTo('contact')">Hire Me</button>
+      <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║          HERO SECTION         ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="home" class="hero-section">
+  <div class="hero-particles">
+    <span *ngFor="let p of [1,2,3,4,5,6,7,8,9,10,11,12]" class="particle" [attr.style]="'--i:'+p"></span>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>Available for Freelance</span>
+    </div>
+
+    <div class="hero-greeting">
+      <span class="code-comment">// Hi, I'm</span>
+    </div>
+
+    <h1 class="hero-name">Fahad Ahmed</h1>
+
+    <div class="hero-role-wrapper">
+      <span class="code-brace">&#123;</span>
+      <span class="typed-role">{{ displayedRole }}<span class="cursor">|</span></span>
+      <span class="code-brace">&#125;</span>
+    </div>
+
+    <p class="hero-summary">
+      Software Developer with 2+ years of experience specializing in Angular frontend,
+      SQL Server database management, ERP systems, and university LMS/ERP portal administration.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary" (click)="scrollTo('portfolio')">
+        <span>View My Work</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn-outline" (click)="scrollTo('contact')">
+        <span>Contact Me</span>
+      </button>
+      <button class="btn-ghost" (click)="downloadResume()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Resume</span>
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item" *ngFor="let s of stats">
+        <span class="stat-value">{{ s.value }}</span>
+        <span class="stat-label">{{ s.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card-wrapper">
+      <div class="hero-avatar-ring">
+        <div class="hero-avatar">
+          <img src="assets/images/profile_avatar.png" alt="Fahad Ahmed" class="avatar-img">
+        </div>
+      </div>
+      <div class="floating-badge badge-angular">Angular</div>
+      <div class="floating-badge badge-sql">SQL Server</div>
+      <div class="floating-badge badge-spring">Spring Boot</div>
+      <div class="floating-badge badge-jasper">Jasper Reports</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" (click)="scrollTo('portfolio')">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>Scroll Down</span>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║       PORTFOLIO SECTION       ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="portfolio" class="section portfolio-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-tag">My Work</span>
+      <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+      <p class="section-subtitle">Enterprise-grade solutions I've built for universities and institutions</p>
+    </div>
+
+    <div class="projects-grid">
+      <article class="project-card" *ngFor="let project of projects; let i = index">
+        <div class="card-visual" [style.background]="project.gradient">
+          <img [src]="project.image" [alt]="project.title" class="project-img">
+          <div class="card-category-tag">{{ project.category }}</div>
+          <div class="card-glow"></div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">{{ project.title }}</h3>
+          <p class="card-desc">{{ project.description }}</p>
+          <div class="card-tech">
+            <span class="tech-tag" *ngFor="let t of project.tech">{{ t }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║        ABOUT SECTION          ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="about" class="section about-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-tag">Who I Am</span>
+      <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-avatar-wrapper">
+          <div class="about-avatar">
+            <img src="assets/images/profile_avatar.png" alt="Fahad Ahmed Avatar" class="about-img">
+          </div>
+          <div class="about-avatar-bg"></div>
+        </div>
+        <div class="about-meta-cards">
+          <div class="meta-card">
+            <span class="meta-icon">🎓</span>
+            <div>
+              <strong>BS Computer Science</strong>
+              <span>GCU, Faisalabad</span>
+            </div>
+          </div>
+          <div class="meta-card">
+            <span class="meta-icon">🏢</span>
+            <div>
+              <strong>SyntaxMatic Technologies</strong>
+              <span>Junior Software Developer</span>
+            </div>
+          </div>
+          <div class="meta-card">
+            <span class="meta-icon">📍</span>
+            <div>
+              <strong>Pakistan</strong>
+              <span>Available for Remote Work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <p>
+          I am <strong>Muhammad Fahad</strong>, a passionate and dedicated Computer Science graduate
+          from GCU, Faisalabad. I completed my Bachelor of Science in Computer Science (BSCS)
+          and developed a strong foundation in software development, database management, and
+          web technologies.
+        </p>
+        <p>
+          I have over <strong>1 year and 5 months</strong> of professional experience working in
+          database management and enterprise systems at <strong>SyntaxMatic Technologies</strong>,
+          where I contributed to managing and developing ERP and LMS systems for multiple
+          universities across Pakistan and Saudi Arabia.
+        </p>
+        <p>
+          I specialize in building scalable web applications, designing efficient databases, and
+          creating data-driven solutions. I am highly motivated to learn new technologies and
+          continuously improve my skills in modern development frameworks.
+        </p>
+
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Enterprise ERP & LMS Development</span>
+          </div>
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Angular Frontend & Spring Boot Backend</span>
+          </div>
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>SQL Server Database Optimization</span>
+          </div>
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Jasper Reports & Data Analytics</span>
+          </div>
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Agile Team Collaboration</span>
+          </div>
+          <div class="highlight-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Multi-University Portal Administration</span>
+          </div>
+        </div>
+
+        <div class="about-actions">
+          <button class="btn-primary" (click)="scrollTo('contact')">Let's Talk</button>
+          <button class="btn-outline" (click)="downloadResume()">Download CV</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║        RESUME SECTION         ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="resume" class="section resume-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-tag">My Expertise</span>
+      <h2 class="section-title">Skills & <span class="gradient-text">Experience</span></h2>
+      <p class="section-subtitle">A comprehensive overview of my technical stack and professional journey</p>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="skills-grid">
+      <div class="skill-category-card" *ngFor="let cat of skillCategories">
+        <div class="skill-cat-header">
+          <span class="skill-cat-icon">{{ cat.icon }}</span>
+          <h3 class="skill-cat-name">{{ cat.name }}</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag" *ngFor="let skill of cat.skills">{{ skill }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-section">
+      <div class="timeline-columns">
+
+        <!-- Experience Column -->
+        <div class="timeline-col">
+          <h3 class="timeline-col-title">
+            <span class="col-icon">💼</span> Professional Experience
+          </h3>
+          <div class="timeline">
+            <div class="timeline-item" *ngFor="let exp of experiences">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <div class="timeline-card-header">
+                  <div>
+                    <h4 class="timeline-role">{{ exp.role }}</h4>
+                    <p class="timeline-company">{{ exp.company }}</p>
+                  </div>
+                  <span class="timeline-period">{{ exp.period }}</span>
+                </div>
+                <ul class="timeline-points">
+                  <li *ngFor="let pt of exp.points">{{ pt }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education & FYP Column -->
+        <div class="timeline-col">
+          <h3 class="timeline-col-title">
+            <span class="col-icon">🎓</span> Education
+          </h3>
+          <div class="timeline">
+            <div class="timeline-item" *ngFor="let edu of education">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <div class="timeline-card-header">
+                  <div>
+                    <h4 class="timeline-role">{{ edu.degree }}</h4>
+                    <p class="timeline-company">{{ edu.institution }}</p>
+                  </div>
+                  <span class="timeline-period">{{ edu.period }}</span>
+                </div>
+                <p class="edu-coursework"><strong>Coursework:</strong> {{ edu.coursework }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final Year Project Card -->
+          <h3 class="timeline-col-title mt-lg">
+            <span class="col-icon">🚀</span> Final Year Project
+          </h3>
+          <div class="fyp-card">
+            <div class="fyp-icon">🏬</div>
+            <h4 class="fyp-title">Smart Inventory & Sales Management System</h4>
+            <div class="fyp-tech-tags">
+              <span class="fyp-tag">MongoDB</span>
+              <span class="fyp-tag">Express.js</span>
+              <span class="fyp-tag">React.js</span>
+              <span class="fyp-tag">Node.js</span>
+              <span class="fyp-tag">JWT Auth</span>
+              <span class="fyp-tag">REST APIs</span>
+              <span class="fyp-tag">Bootstrap</span>
+              <span class="fyp-tag">Tailwind CSS</span>
+            </div>
+            <ul class="fyp-points">
+              <li>Developed a full-stack inventory and sales management system to manage products, stock levels, suppliers, and sales transactions.</li>
+              <li>Implemented role-based authentication for admin and staff, real-time stock updates, and sales reporting dashboard.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║       CONTACT SECTION         ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="contact" class="section contact-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+      <p class="section-subtitle">Have a project in mind? Let's build something amazing together.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3 class="contact-info-title">Contact Information</h3>
+        <p class="contact-info-desc">
+          I'm actively looking for freelance projects and professional opportunities.
+          Feel free to reach out — I typically respond within 24 hours.
+        </p>
+
+        <div class="contact-items">
+          <a class="contact-item" href="mailto:fahadahmed1448@gmail.com">
+            <div class="contact-item-icon email-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="contact-item-label">Email</span>
+              <span class="contact-item-value">fahadahmed1448&#64;gmail.com</span>
+            </div>
+          </a>
+
+          <a class="contact-item" href="tel:+923134780074">
+            <div class="contact-item-icon phone-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <span class="contact-item-label">Phone</span>
+              <span class="contact-item-value">+92-313-4780074</span>
+            </div>
+          </a>
+
+          <a class="contact-item" href="https://www.linkedin.com/in/fahad-ahmed-20748b1a0" target="_blank" rel="noopener">
+            <div class="contact-item-icon linkedin-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <span class="contact-item-label">LinkedIn</span>
+              <span class="contact-item-value">fahad-ahmed-20748b1a0</span>
+            </div>
+          </a>
+
+          <a class="contact-item" href="https://github.com/FahadAhmedButt" target="_blank" rel="noopener">
+            <div class="contact-item-icon github-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <span class="contact-item-label">GitHub</span>
+              <span class="contact-item-value">FahadAhmedButt</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="social-row">
+          <a class="social-btn whatsapp" href="https://wa.me/923134780074" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a class="social-btn linkedin" href="https://www.linkedin.com/in/fahad-ahmed-20748b1a0" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="social-btn github" href="https://github.com/FahadAhmedButt" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form class="contact-form" (ngSubmit)="submitForm()" #contactFormEl="ngForm" novalidate>
+        <div class="form-success" *ngIf="formSubmitted">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Message sent! I'll get back to you soon.</span>
+        </div>
+        <div class="form-error-msg" *ngIf="formError">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Please fill in all fields before submitting.</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">Full Name</label>
+            <input class="form-input" id="fname" type="text" placeholder="John Doe" [(ngModel)]="contactForm.name" name="name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="femail">Email Address</label>
+            <input class="form-input" id="femail" type="email" placeholder="john@example.com" [(ngModel)]="contactForm.email" name="email"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fsubject">Subject</label>
+          <input class="form-input" id="fsubject" type="text" placeholder="Project Inquiry / Freelance Opportunity" [(ngModel)]="contactForm.subject" name="subject"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fmessage">Message</label>
+          <textarea class="form-input form-textarea" id="fmessage" rows="5" placeholder="Tell me about your project..." [(ngModel)]="contactForm.message" name="message"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary btn-full">
+          <span>Send Message</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║           FOOTER              ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo">Fahad<span class="logo-dot">.</span></div>
+        <p class="footer-tagline">
+          "Building scalable web, database, and data-driven solutions.
+          Focused on clean code, performance, and real business needs.
+          Available for freelance projects and professional opportunities."
+        </p>
+        <div class="footer-socials">
+          <a class="footer-social-btn" href="https://wa.me/923134780074" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://github.com/FahadAhmedButt" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://www.linkedin.com/in/fahad-ahmed-20748b1a0" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">Quick Links</h4>
+        <ul>
+          <li><a (click)="scrollTo('home')">Home</a></li>
+          <li><a (click)="scrollTo('portfolio')">Portfolio</a></li>
+          <li><a (click)="scrollTo('about')">About</a></li>
+          <li><a (click)="scrollTo('resume')">Resume</a></li>
+          <li><a (click)="scrollTo('contact')">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact-info">
+        <h4 class="footer-nav-title">Contact Info</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:fahadahmed1448@gmail.com">fahadahmed1448&#64;gmail.com</a>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.19 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.1 2.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
+            <a href="tel:+923134780074">+92-313-4780074</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Fahad Ahmed. All rights reserved.</p>
+      <p>Designed & Built with ❤️ by Fahad Ahmed</p>
+    </div>
+  </div>
+</footer>

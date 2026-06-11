@@ -1,0 +1,65 @@
+/* ════════════════════════════════════════════════════════════════
+   FAHAD AHMED — PORTFOLIO GLOBAL STYLES  |  styles.css
+   ════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap');
+
+/* ─── RESET & BASE ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #090d16;
+  color: #f3f4f6;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── CUSTOM SCROLLBAR ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0f1623; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #a855f7, #06b6d4); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, #c084fc, #22d3ee); }
+
+/* ─── SELECTION ──────────────────────────────────────────────────────────────── */
+::selection { background: rgba(168, 85, 247, 0.3); color: #f3f4f6; }
+
+/* ─── GLOBAL BACKGROUND ──────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 80% at 20% 10%, rgba(168, 85, 247, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 80% 90%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 60% 40%, rgba(168, 85, 247, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── TYPOGRAPHY GLOBALS ─────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
+a { color: inherit; }
+button { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ─── UTILITY ────────────────────────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
