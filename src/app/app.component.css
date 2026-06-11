@@ -1425,3 +1425,26 @@
   .hamburger { display: flex; z-index: 1000; position: relative; }
   .btn-hire { display: none; }
 }
+
+@media (max-width: 768px) {
+
+  .avatar-img,
+  .about-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .hero-card-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+
+  .about-avatar,
+  .hero-avatar {
+    width: 100%;
+    height: auto;
+  }
+}
